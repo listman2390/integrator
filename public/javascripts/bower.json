@@ -1,0 +1,26 @@
+{
+  "name": "Grability",
+  "homepage": "https://github.com/listman2390/integrator",
+  "authors": [
+    "“Listman” <listman2390@gmail.com>"
+  ],
+  "description": "Integrator",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+  	 "jquery-ui":"*",
+  	 "jquery":"*",
+  	 "bootstrap":"*",
+  	 "angular-drag-and-drop-lists":"*",
+  	 "angular":"*"
+   },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

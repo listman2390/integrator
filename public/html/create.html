@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html ng-app="createApp">
+<head>
+<meta charset="utf-8">
+<title>Grability Integrator</title>
+<link rel="stylesheet"
+	href="/assets/javascripts/bower_components/jquery-ui/themes/overcast/jquery-ui.css">
+<link rel="stylesheet"
+	href="/assets/javascripts/bower_components/bootstrap/dist/css/bootstrap.css">
+
+<style type="text/css">
+/**
+ * For the correct positioning of the placeholder element, the dnd-list and
+ * it's children must have position: relative
+ */
+.simpleDemo ul[dnd-list], .simpleDemo ul[dnd-list]>li {
+	position: relative;
+}
+
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+.simpleDemo ul[dnd-list] {
+	min-height: 42px;
+	padding-left: 0px;
+}
+
+/**
+ * The dndDraggingSource class will be applied to
+ * the source element of a drag operation. It makes
+ * sense to hide it to give the user the feeling
+ * that he's actually moving it.
+ */
+.simpleDemo ul[dnd-list] .dndDraggingSource {
+	display: none;
+}
+
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+.simpleDemo ul[dnd-list] .dndPlaceholder {
+	display: block;
+	background-color: #ddd;
+	min-height: 42px;
+}
+
+/**
+ * The dnd-lists's child elements currently MUST have
+ * position: relative. Otherwise we can not determine
+ * whether the mouse pointer is in the upper or lower
+ * half of the element we are dragging over. In other
+ * browsers we can use event.offsetY for this.
+ */
+.simpleDemo ul[dnd-list] li {
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	display: block;
+	padding: 10px 15px;
+	margin-bottom: -1px;
+}
+
+/**
+ * Show selected elements in green
+ */
+.simpleDemo ul[dnd-list] li.selected {
+	background-color: #dff0d8;
+	color: #3c763d;
+}
+</style>
+</head>
+<body style="background-color: #FDFDFD">
+	<header style="background-color: #F6F8F8;">
+		<div style="background-color: #4BB4AE; width: 100%; height: 2px"></div>
+		<div class="container-fluid">
+			<img src="/assets/images/logo.png" alt="grability inc" /> <a href="/">Archivos</a>
+			<a  href="main">Procesados</a>
+		</div>
+		<hr />
+	</header>
+	<section style="width: 80%" class="container">
+		<div ng-controller="createCtrl">
+			<div class="row">
+				<div class="col-md-8">
+					<label>Separator</label>
+					<select ng-model="selectedSeparator">
+						<option ng-repeat="separator in separators" value="{{separator}}">{{separator}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<button ng-click="addColumn()" class="btn btn-primary">Add Column</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<select ng-model="selectedSchema" ng-change="changeSchema()">
+						<option ng-repeat="schema in schemas" value="{{schema}}">{{schema.name}}</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<select ng-model="selectedTable">
+						<option ng-repeat="table in tables">{{table.name}}</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<button ng-click="addTable()" class="btn btn-primary">Add Table</button>
+				</div>
+			</div>
+			<div class="simpleDemo row">
+				<div class="col-md-8">
+					<div class="row">
+						<div ng-repeat="(listName, list) in models.lists" class="col-md-6">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<h3 class="panel-title">{{listName}}</h3>
+								</div>
+								<div class="panel-body" ng-include="'/assets/html/multi.html'"></div>
+							</div>
+						</div>
+					</div>
+
+					<div view-source="simple"></div>
+
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Column Properties</h3>
+						</div>
+						<div class="panel-body">
+							<pre class="code">{{modelAsJson}}</pre>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Generated Model</h3>
+						</div>
+						<div class="panel-body">
+							<pre class="code">{{modelAsJson}}</pre>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<footer>
+		<hr />
+		<div class="container">
+			<span style="float: left;"> &reg;2015 Grability. All Rights
+				Reserved </span> <span style="float: right;">Powered by: Grability
+				Inc.</span>
+		</div>
+	</footer>
+	<script type="text/javascript"
+		src="/assets/javascripts/bower_components/jquery/dist/jquery.js"></script>
+	<script type="text/javascript"
+		src="/assets/javascripts/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script type="text/javascript"
+		src="/assets/javascripts/bower_components/angular/angular.js"></script>
+	<script type="text/javascript"
+		src="/assets/javascripts/bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+	<script type="text/javascript" src="/assets/javascripts/main.js"></script>
+</body>
+</html>
